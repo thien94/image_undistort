@@ -1,0 +1,19 @@
+<launch>
+
+<arg name="input_camera_name" default="/camera/fisheye1" />
+<arg name="scale" default="1.0" />
+<arg name="calib_path" default="$(find image_undistort)/cfg/t265_input_config.yaml"/>
+
+  <node name="image_undistort_node" pkg="image_undistort" type="image_undistort_node" output="screen">
+    <param name="input_camera_namespace" value="t265"/>      
+    <param name="input_camera_info_from_ros_params" value = "true"/>    
+    <param name="scale" value="$(arg scale)"/>
+    <param name="output_camera_info_source" value="auto_generated"/>
+    <param name="process_image" value="true"/>
+    <param name="undistort_image" value="true"/>
+    <param name="publish_tf" value="false"/>
+    <rosparam file="$(arg calib_path)"/>
+    <remap from="input/image" to="$(arg input_camera_name)/image_raw"/>
+  </node>
+
+</launch>

@@ -297,6 +297,7 @@ void StereoUndistort::imagesCallback(
   }
   frame_counter_ = 0;
 
+  // ROS_INFO("Process stereo images");
   processAndSendImage(first_image_msg_in, CameraSide::FIRST);
   processAndSendImage(second_image_msg_in, CameraSide::SECOND);
 

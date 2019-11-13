@@ -189,12 +189,22 @@ void Undistorter::distortPixel(const Eigen::Matrix<double, 3, 3>& K_in,
     } break;
     case DistortionModel::DOUBLESPHERE: {
       // Split out parameters for easier reading
-      const double& epsilon = D[0];
-      const double& alpha = D[1];
 
-      const double d1 = std::sqrt(x * x + y * y + 1.0);
-      const double d2 = std::sqrt(x * x + y * y + (epsilon*d1 + 1.0)*(epsilon*d1 + 1.0));
-      const double scaling = 1.0f/(alpha*d2 + (1-alpha)*(epsilon*d1+1.0));
+      // For double-sphere model
+      // const double& epsilon = -2.6479629792725018e-8;//D[0];
+      // const double& alpha = 0.6716566120840718;//D[1];
+      // ROS_INFO("Epsilon is %f", epsilon);
+      // ROS_INFO("Alpha is %f", alpha);
+      // const double d1 = std::sqrt(x * x + y * y + 1.0);
+      // const double d2 = std::sqrt(x * x + y * y + (epsilon*d1 + 1.0)*(epsilon*d1 + 1.0));
+      // const double scaling = 1.0f/(alpha*d2 + (1-alpha)*(epsilon*d1+1.0));
+
+      // For Kannala-Brandt model
+      const double r = std::sqrt(x * x + y * y);
+      const double theta = std::atan2(r, 1.0);
+      const double d = theta + D[0] * std::pow(theta, 3); + D[1] * std::pow(theta, 5) + D[2] * std::pow(theta, 7) + D[3] * std::pow(theta, 9);
+      const double scaling = d / r;
+
       xd = x * scaling;
       yd = y * scaling;
     } break;

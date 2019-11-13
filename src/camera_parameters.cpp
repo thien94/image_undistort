@@ -52,6 +52,7 @@ BaseCameraParameters::BaseCameraParameters(const ros::NodeHandle& nh,
       nh.getParam(camera_namespace + "/T", T_in)) {
     xmlRpcToMatrix(T_in, &T_);
     T_loaded = true;
+    ROS_INFO("Finish loading T");
   } else {
     T_ = Eigen::Matrix4d::Identity();
   }
@@ -82,6 +83,7 @@ BaseCameraParameters::BaseCameraParameters(const ros::NodeHandle& nh,
              .finished() *
          T_;
   }
+  ROS_INFO("Finish loading camera parameters");
 }
 
 BaseCameraParameters::BaseCameraParameters(
@@ -668,11 +670,16 @@ bool StereoCameraParameters::generateRectificationParameters() {
     return false;
   }
 
+  // ROS_INFO("Output tentative resolution is %d x %d", first_.getOutputPtr()->resolution().width, first_.getOutputPtr()->resolution().height);
+
   // grab most conservative values
-  cv::Size resolution(std::min(first_.getOutputPtr()->resolution().width,
-                               second_.getOutputPtr()->resolution().width),
-                      std::min(first_.getOutputPtr()->resolution().height,
-                               second_.getOutputPtr()->resolution().height));
+  cv::Size resolution(std::min({first_.getOutputPtr()->resolution().width,
+                               second_.getOutputPtr()->resolution().width,
+                               800}),
+                      std::min({first_.getOutputPtr()->resolution().height,
+                               second_.getOutputPtr()->resolution().height,
+                               800}));
+  // cv::Size resolution(800, 800);
 
   Eigen::Matrix3d K = Eigen::Matrix3d::Zero();
   K(0, 0) = std::max(first_.getOutputPtr()->K()(0, 0),
@@ -690,6 +697,9 @@ bool StereoCameraParameters::generateRectificationParameters() {
     ROS_ERROR("Automatic generation of stereo output parameters failed");
     return false;
   }
+
+  // ROS_INFO("Input resolution is %d x %d", first_.getInputPtr()->resolution().width, first_.getInputPtr()->resolution().height);
+  // ROS_INFO("Output resolution is %f x %f", K(0,2), K(1,2));
 
   return true;
 }

@@ -197,6 +197,7 @@ void ImageUndistort::imageCallback(
     }
   }
 
+  ROS_INFO("Try to undistort image");
   undistorter_ptr_->undistortImage(image_in_ptr->image,
                                    &(image_out_ptr->image));
 
