@@ -1,1 +1,3 @@
 .clang_complete
+.vscode/*
+__pycache__/
