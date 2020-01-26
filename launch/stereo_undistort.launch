@@ -1,6 +1,7 @@
 <launch>
 
 <arg name="namespace" default="t265" />
+<arg name="camera_name" default="t265" />
 <arg name="first_camera_name" default="fisheye1" />
 <arg name="second_camera_name" default="fisheye2" />
 <arg name="scale" default="1.0" />
@@ -8,7 +9,6 @@
 <arg name="stereo_params_camchain" default="$(find image_undistort)/cfg/t265_stereo_input_config.yaml"/>
 
 <group ns="$(arg namespace)">
-
   <node name="stereo_undistort" pkg="image_undistort" type="stereo_undistort_node" output="screen">
     <param name="input_camera_info_from_ros_params" value = "true"/>
     <param name="first_camera_namespace" value="$(arg first_camera_name)"/>
@@ -20,8 +20,8 @@
     
     <rosparam file="$(arg stereo_params_camchain)"/>
 
-    <remap from="raw/first/image" to="/camera/$(arg first_camera_name)/image_raw"/>
-    <remap from="raw/second/image" to="/camera/$(arg second_camera_name)/image_raw"/>
+    <remap from="raw/first/image" to="/$(arg camera_name)/$(arg first_camera_name)/image_raw"/>
+    <remap from="raw/second/image" to="/$(arg camera_name)/$(arg second_camera_name)/image_raw"/>
   </node>
 </group>
 

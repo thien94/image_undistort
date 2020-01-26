@@ -4,11 +4,11 @@ fisheye1:
   distortion_model: double_sphere
   intrinsics: [284.0513916015625, 285.19189453125, 427.4079895019531, 401.1722106933594]
   resolution: [848, 800]
-  rostopic: /camera/fisheye1/image_raw
+  rostopic: /t265/fisheye1/image_raw
   T_cn_cnm1: 
   - [1.0, 0.0, 0.0, 0.0]
   - [0.0, 1.0, 0.0, 0.0]
-  - [0.0, 0.0, 1.0, 0.0]
+  - [0.0, 0.0, -1.0, 0.0]  # Note: flip the sign of element (3,3) to flip around z axis
   - [0.0, 0.0, 0.0, 1.0]
   # T_cn_cnm1: 
   # - [1.0, 0.0, 0.0, 0.0642428249120712] 
@@ -39,7 +39,7 @@ fisheye2:
   T_cn_cnm1: 
   - [1.0, 0.0, 0.0, -0.0642428249120712] 
   - [0.0, 1.0, 0.0, -1.58874827320687e-05] 
-  - [0.0, 0.0, 1.0, 3.78768891096115e-06] 
+  - [0.0, 0.0, -1.0, 3.78768891096115e-06] # Note: flip the sign of element (3,3) to flip around z axis
   - [0.0, 0.0, 0.0, 1.0]
   # T_cn_cnm1: 
   # - [0.999994, -0.000826635, -0.00329655, -0.0642428249120712] 
@@ -52,4 +52,4 @@ fisheye2:
   # - [-0.00329655, 0.000659199, 0.999994, -0.000215556909097359 ]
   # - [0.0, 0.0, 0.0, 1.0]
   resolution: [848, 800]
-  rostopic: /camera/fisheye2/image_raw
+  rostopic: /t265/fisheye2/image_raw
