@@ -24,7 +24,8 @@ catkin_package(
   LIBRARIES ${PROJECT_NAME}_nodelet
 )
 
-find_package(OpenCV REQUIRED COMPONENTS core calib3d)
+include(/home/ntu/opencv/build/OpenCVConfig.cmake)
+# find_package(OpenCV REQUIRED COMPONENTS core calib3d)
 
 find_package(NLOPT)
 IF(${NLOPT_FOUND})

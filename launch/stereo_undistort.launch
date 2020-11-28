@@ -15,7 +15,7 @@
     <param name="second_camera_namespace" value="$(arg second_camera_name)"/>
     <param name="scale" value="$(arg scale)"/>
     <param name="process_every_nth_frame" value="$(arg process_every_nth_frame)"/>
-    <param name="T_invert" value="true"/>
+    <param name="T_invert" value="false"/>
     <param name="output_camera_info_source" value="match_input"/>
     
     <rosparam file="$(arg stereo_params_camchain)"/>

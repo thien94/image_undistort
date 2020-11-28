@@ -8,7 +8,7 @@ fisheye1:
   T_cn_cnm1: 
   - [1.0, 0.0, 0.0, 0.0]
   - [0.0, 1.0, 0.0, 0.0]
-  - [0.0, 0.0, -1.0, 0.0]  # Note: flip the sign of element (3,3) to flip around z axis
+  - [0.0, 0.0, 1.0, 0.0]  # Note: flip the sign of element (3,3) to flip around z axis
   - [0.0, 0.0, 0.0, 1.0]
   # T_cn_cnm1: 
   # - [1.0, 0.0, 0.0, 0.0642428249120712] 
@@ -39,7 +39,7 @@ fisheye2:
   T_cn_cnm1: 
   - [1.0, 0.0, 0.0, -0.0642428249120712] 
   - [0.0, 1.0, 0.0, -1.58874827320687e-05] 
-  - [0.0, 0.0, -1.0, 3.78768891096115e-06] # Note: flip the sign of element (3,3) to flip around z axis
+  - [0.0, 0.0, 1.0, 3.78768891096115e-06] # Note: flip the sign of element (3,3) to flip around z axis
   - [0.0, 0.0, 0.0, 1.0]
   # T_cn_cnm1: 
   # - [0.999994, -0.000826635, -0.00329655, -0.0642428249120712] 
